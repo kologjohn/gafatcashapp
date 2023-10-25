@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../controllers/accounts_controllers.dart';
 import '../widgets/social_button.dart';
+import '../controller/accounts.dart';
 import 'forgot_screen.dart';
 import 'login_field.dart';
 
@@ -16,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
    TextEditingController email=TextEditingController();
    TextEditingController password=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
 
@@ -40,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20,),
                 ElevatedButton(
                   onPressed: () async {
-                   //await FirebaseAccounts().signup(email.text, password.text);
+                   await FirebaseAccounts().signup(email.text, password.text);
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(395, 55),
