@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../controllers/accounts_controllers.dart';
+import 'package:gafatcash/global.dart';
+import 'package:gafatcash/startup/controller/routes.dart';
 import '../widgets/social_button.dart';
 import 'forgot_screen.dart';
 import 'login_field.dart';
@@ -47,12 +48,41 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
                   ),
-                  child: const Text(
-                    //'Sign in',
-                    'Sign In',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        gradient:  LinearGradient(
+                          colors: [
+                            Global.gradient1,
+                            Global.gradient2,
+                            Global.gradient3,
+                          ],
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                        ),
+                        borderRadius: BorderRadius.circular(7)
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(395, 55),
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                      ),
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, Routes.dashboard);
+                        },
+                        child: const Text(
+                          //'Sign in',
+                          'Sign In',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
