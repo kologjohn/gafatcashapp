@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gafatcash/global.dart';
-import 'package:gafatcash/startup/controller/routes.dart';
 import '../widgets/social_button.dart';
+import '../controller/accounts.dart';
 import 'forgot_screen.dart';
 import 'login_field.dart';
 
@@ -17,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
    TextEditingController email=TextEditingController();
    TextEditingController password=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
 
@@ -41,48 +41,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20,),
                 ElevatedButton(
                   onPressed: () async {
-                   //await FirebaseAccounts().signup(email.text, password.text);
+                   await FirebaseAccounts().signup(email.text, password.text);
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(395, 55),
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
                   ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        gradient:  LinearGradient(
-                          colors: [
-                            Global.gradient1,
-                            Global.gradient2,
-                            Global.gradient3,
-                          ],
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                        ),
-                        borderRadius: BorderRadius.circular(7)
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(395, 55),
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                      ),
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context, Routes.dashboard);
-                        },
-                        child: const Text(
-                          //'Sign in',
-                          'Sign In',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 17,
-                          ),
-                        ),
-                      ),
+                  child: const Text(
+                    //'Sign in',
+                    'Sign In',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
                     ),
                   ),
                 ),
