@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "322040387738",
+    "project_id": "android-50852",
+    "storage_bucket": "android-50852.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322040387738:android:e9f03cb6acf38e828f2723",
+        "android_client_info": {
+          "package_name": "com.gafatcash.gafatcash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM98OSija2kU2s1SOzpwFYaHUf9Uj96yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
