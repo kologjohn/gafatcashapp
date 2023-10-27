@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gafatcash/global.dart';
+import 'package:gafatcash/startup/components/forgot_password.dart';
 import '../widgets/social_button.dart';
 import '../controller/accounts.dart';
 import 'forgot_screen.dart';
@@ -38,10 +40,25 @@ class _LoginScreenState extends State<LoginScreen> {
                  LoginField(hintText: 'Email',controller: email,),
                 const SizedBox(height: 15,),
                  LoginField(hintText: 'Password',controller:password ,),
-                const SizedBox(height: 20,),
-                ElevatedButton(
+                const SizedBox(height: 15,),
+              const ForgotPasText(),
+              const SizedBox(height: 20,),
+              Container(
+                decoration: BoxDecoration(
+                    gradient:  const LinearGradient(
+                      colors: [
+                        Global.gradient1,
+                        Global.gradient2,
+                        Global.gradient3,
+                      ],
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                    ),
+                    borderRadius: BorderRadius.circular(7)
+                ),
+                child: ElevatedButton(
                   onPressed: () async {
-                   await FirebaseAccounts().signup(email.text, password.text);
+                    await FirebaseAccounts().signup(email.text, password.text);
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(395, 55),
@@ -50,32 +67,57 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: const Text(
                     //'Sign in',
-                    'Sign In',
+                    'Sign in',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 17,
                     ),
                   ),
                 ),
+              ),
+
+                // ElevatedButton(
+                //   onPressed: () async {
+                //    await FirebaseAccounts().signup(email.text, password.text);
+                //   },
+                //   style: ElevatedButton.styleFrom(
+                //     fixedSize: const Size(395, 55),
+                //     backgroundColor: Colors.transparent,
+                //     shadowColor: Colors.transparent,
+                //   ),
+                //   child: const Text(
+                //     'Sign In',
+                //     style: TextStyle(
+                //       fontWeight: FontWeight.w600,
+                //       fontSize: 17,
+                //     ),
+                //   ),
+                // ),
                  //const SizedBox(height: 20,),
                 const SizedBox(height: 15,),
                 const Text(
-                  'Or',
+                  '- Or continue with -',
                   style: TextStyle(
                     fontSize: 17,
                   ),
                 ),
                  const SizedBox(height: 15),
                 // const SocialLogin(),
-                 SocialButton(
-                  iconPath: 'assets/svgs/g_logo.svg',
-                  label: 'Continue with Google',horizontalPadding: 100, onPressed: () {  },
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     SocialButton(
+                      iconPath: 'assets/svgs/g_logo.svg',
+                      label: '',horizontalPadding: 20, onPressed: () {  },
                 ),
-                const SizedBox(height: 10,),
-                 SocialButton(
-                  iconPath: 'assets/svgs/f_logo.svg',
-                  label: 'Continue with Facebook', horizontalPadding: 90, onPressed: () {  },
-                ),
+                     const SizedBox(width: 10,),
+                     SocialButton(
+                       iconPath: 'assets/svgs/f_logo.svg',
+                       label: '', horizontalPadding: 20, onPressed: () {  },
+                     ),
+                   ],
+                 ),
+
 
                 const SizedBox(height: 15,),
                 const ForgotPassBtn(),
