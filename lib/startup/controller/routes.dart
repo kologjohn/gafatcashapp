@@ -1,6 +1,6 @@
-import 'package:gafatcash/startup/dashboard/dashboard_screen.dart';
 import '../components/signup_screen.dart';
 import '../components/login_screen.dart';
+import '../../dashboard/components/dashboard.dart';
 
 class Routes{
  static String login="login";
@@ -11,5 +11,5 @@ class Routes{
 final pages={
   Routes.login:(context)=>const LoginScreen(),
   Routes.signup:(context)=>const SignUpScreen(),
-  Routes.dashboard:(context)=>const DashboardScreen(),
+  Routes.dashboard:(context)=>const Dashboard(),
 };

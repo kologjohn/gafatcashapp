@@ -47,6 +47,7 @@ dependencies:
   flutter_progress_hud: ^2.0.2
   google_sign_in: ^6.1.5
   fl_chart: ^0.62.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gafatcash/startup/controller/accounts.dart';
 import 'package:gafatcash/startup/controller/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'global.dart';
 
 void main() async{
@@ -14,15 +16,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: pages,
-      initialRoute: Routes.login,
-      debugShowCheckedModeBanner: false,
-      title: 'Responsive Form',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Global.backgroundColor,
+    return ChangeNotifierProvider<FirebaseAccounts>(
+      create: (BuildContext context)=>FirebaseAccounts(),
+      child: MaterialApp(
+        routes: pages,
+        initialRoute: Routes.login,
+        debugShowCheckedModeBanner: false,
+        title: 'Responsive Form',
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: Global.backgroundColor,
+        ),
+        //home: const LoginScreen(),
       ),
-      //home: const LoginScreen(),
     );
   }
 }

@@ -25,7 +25,7 @@ class ForgotPassBtn extends StatelessWidget {
           InkWell(
             child: GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, Routes.dashboard);
+                Navigator.pushNamed(context, Routes.signup);
               },
               child: const Text(
                 ' Sign Up',

@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1058517351380",
+    "project_id": "gafatcashapp-6c45f",
+    "storage_bucket": "gafatcashapp-6c45f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058517351380:android:40bcf79d50278d6c793441",
+        "android_client_info": {
+          "package_name": "com.gafatcash.gafatcash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058517351380-dv787nium22lfaj97f578e1rooa8oduq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBypUEdN1PXwEc35IdIt-cv8dnRIz1RAx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058517351380-dv787nium22lfaj97f578e1rooa8oduq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058517351380:android:3baaa3866ef90632793441",
+        "android_client_info": {
+          "package_name": "com.kologsoft.com.loginform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058517351380-dv787nium22lfaj97f578e1rooa8oduq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBypUEdN1PXwEc35IdIt-cv8dnRIz1RAx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058517351380-dv787nium22lfaj97f578e1rooa8oduq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
