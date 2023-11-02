@@ -7,12 +7,19 @@ import 'global.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: const FirebaseOptions(apiKey: "AIzaSyBypUEdN1PXwEc35IdIt-cv8dnRIz1RAx0", appId: "1:1058517351380:android:3baaa3866ef90632793441", messagingSenderId: "", projectId: "gafatcashapp-6c45f"));
+  await Firebase.initializeApp(options: const FirebaseOptions(apiKey: "AIzaSyBSSr_ZtiG9eys6tCpVqJdTPjClejzrZ-g", appId: "1:542035889260:android:7f072e027fec60b4eedc49", messagingSenderId: "", projectId: "gafatcash-405b7"));
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class MyApp extends StatelessWidget {
         routes: pages,
         initialRoute: Routes.login,
         debugShowCheckedModeBanner: false,
-        title: 'Responsive Form',
+        title: 'GAFAT CASH',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: Global.backgroundColor,
         ),

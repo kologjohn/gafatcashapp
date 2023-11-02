@@ -18,6 +18,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    //FirebaseAccounts().innitial(context);
+    super.initState();
+  }
   final loginformkey=GlobalKey<FormState>();
   bool validate(){
     return loginformkey.currentState!.validate();
@@ -159,11 +165,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     iconPath: 'assets/svgs/g_logo.svg',
                                     label: '',horizontalPadding: 20, onPressed: () async {
                                       final pro=ProgressHUD.of(context);
-                                     // pro!.show();
-                                      //await value.auth.signOut();
-                                      String kk=await value.googlesignup(context);
-                                      SnackBar snack=SnackBar(content: Text(kk));
-                                      ScaffoldMessenger.of(context).showSnackBar(snack);
+                                     pro!.show();
+                                     await value.googlesignup(context);
+                                      pro!.dismiss();
+
+
+
                                   },
                                   ),
                                   const SizedBox(width: 10,),

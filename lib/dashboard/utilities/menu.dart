@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:gafatcash/startup/controller/routes.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
+
 
 
 import '../../startup/controller/accounts.dart';
@@ -10,10 +13,11 @@ class Menus{
   static PopupMenuItem buildPopupMenuItem(String title, IconData iconData,BuildContext context) {
     return PopupMenuItem(
       child:  GestureDetector(
-        onTap: (){
+        onTap: () async{
           if(title=="Logout")
             {
-              FirebaseAccounts().logout(context);
+              await FirebaseAccounts().logout(context);
+              Navigator.pushNamedAndRemoveUntil(context, Routes.login, (Route<dynamic> route) => false);
             }
         },
         child: Row(
@@ -305,193 +309,226 @@ class Menus{
     // }
     //);
   }
-  void showSheet(context,double density,double pounds,double karat,double perpound,double total,String key,double grams,double volume,double price) {
+  void showSheet(context,String sendcountry,String recipeintcountry,double sendamount,double getamount,String sentcurrency,String receivingcurrency,String recipientcontact,String recipientname) {
     // Show a modal bottom sheet with the specified context and builder method.
-    // showMaterialModalBottomSheet(backgroundColor:Colors.black,context: context, builder: (BuildContext bc) {
-    //   return Container(
-    //     // Define padding for the container.
-    //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-    //     decoration: const BoxDecoration(
-    //       color: Colors.white,
-    //       borderRadius: BorderRadius.only(
-    //         topLeft: Radius.circular(20),
-    //         topRight: Radius.circular(20)
-    //       )
-    //     ),
-    //     // Create a Wrap widget to display the sheet contents.
-    //     child: Wrap(
-    //       spacing: 30, // Add spacing between the child widgets.
-    //       children:[
-    //         // Add a container with height to create some space.
-    //         Row(
-    //           children: [
-    //             Expanded(
-    //               flex: 1,
-    //               child: Row(
-    //                 children: [
-    //                   TextButton.icon(onPressed: (){
-    //                     Navigator.pop(context);
-    //                     //FirebaseAccounts().db.collection("transactions").doc(key).delete();
-    //                   },
-    //                     icon: const Icon(Icons.delete_forever_sharp,color: Colors.red,), label: const Text("Delete"),
-    //                   )
-    //                 ],
-    //               ),
-    //             ),
-    //             Expanded(
-    //               flex: 1,
-    //               child: Row(
-    //                 children: [
-    //                   TextButton.icon(onPressed: (){
-    //                     Navigator.pop(context);
-    //
-    //                     calculator(context,density,pounds,karat,perpound,total,key,grams,volume,price);
-    //                   },
-    //                     icon: const Icon(Icons.edit,color: Colors.orange,), label: const Text("Edit"),
-    //                   )
-    //                 ],
-    //               ),
-    //             ),
-    //             Expanded(
-    //               flex: 1,
-    //               child: Row(
-    //                 children: [
-    //                   TextButton.icon(onPressed: (){},
-    //                     icon: const Icon(Icons.share,color: Colors.green,), label: const Text("Share"),
-    //                   )
-    //
-    //                 ],
-    //               ),
-    //             )
-    //
-    //           ],
-    //
-    //         ),
-    //         const Divider(thickness: 5,color: Colors.black12,),
-    //         // Add a text widget with a title for the sheet.
-    //         const Text("Record Details ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
-    //         Container(height: 10), // Add some more space.
-    //         const Divider(thickness: 1,color: Colors.black38,),
-    //
-    //         // Add a text widget with a long description for the sheet.
-    //         Column(
-    //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //           children: [
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               children: [
-    //                 Text('Pounds:',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //                 Text('$pounds',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //             const Divider(thickness: 1,color: Colors.black38,),
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               children: [
-    //                 Text('Density',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //                 Text('$density',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //             const Divider(thickness: 1,color: Colors.black38,),
-    //
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               children: [
-    //                 Text('Karat',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //                 Text('$karat',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //             const Divider(thickness: 1,color: Colors.black38,),
-    //
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               children: [
-    //                 Text('Per Pound',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //                 Text('$perpound',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //             const Divider(thickness: 1,color: Colors.black38,),
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               children: [
-    //                 Text('Total',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //                 Text('$total',
-    //                   style: TextStyle(
-    //                       color: Colors.grey[600], // Set the text color.
-    //                       fontSize: 14 // Set the text size.
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //           ],
-    //         ),
-    //
-    //         Container(height: 10), // Add some more space.
-    //         // Add a row widget to display buttons for closing and reading more.
-    //         Row(
-    //           mainAxisAlignment: MainAxisAlignment.end, // Align the buttons to the right.
-    //           children: <Widget>[
-    //             // Add a text button to close the sheet.
-    //             TextButton(
-    //               style: TextButton.styleFrom(foregroundColor: Colors.transparent,), // Make the button text transparent.
-    //               onPressed: (){
-    //                 Navigator.pop(context); // Close the sheet.
-    //               },
-    //               child: Text("Close", style: TextStyle(color: Theme.of(context).colorScheme.primary)), // Add the button text.
-    //             ),
-    //             // Add an elevated button to read more.
-    //
-    //           ],
-    //         )
-    //       ],
-    //     ),
-    //   );
-    // });
+    showMaterialModalBottomSheet(backgroundColor:Colors.black,context: context, builder: (BuildContext bc) {
+      return ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: 400
+        ),
+        child: Builder(
+          builder: (context) {
+            return Container(
+              // Define padding for the container.
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20)
+                )
+              ),
+              // Create a Wrap widget to display the sheet contents.
+              child: Wrap(
+                spacing: 30, // Add spacing between the child widgets.
+                children:[
+                  // Add a container with height to create some space.
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Row(
+                          children: [
+
+                      const Expanded(
+                        flex: 1,
+                        child: Row(
+                          children: [
+                            Expanded(child: Text("Record Detail",style: TextStyle(color: Colors.black),))
+                            // TextButton.icon(onPressed: (){
+                            //   Navigator.pop(context);
+                            //
+                            //  // calculator(context,density,pounds,karat,perpound,total,key,grams,volume,price);
+                            // },
+                            //   icon: const Icon(Icons.edit,color: Colors.orange,), label: const Text("Edit"),
+                            // )
+                          ],
+                        ),
+                      ),
+                            Expanded(
+                              flex: 1,
+                              child: TextButton.icon(onPressed: (){
+                                Navigator.pop(context);
+                                //FirebaseAccounts().db.collection("transactions").doc(key).delete();
+                              },
+                                icon: const Icon(Icons.delete_forever_sharp,color: Colors.red,), label: const Text("Delete"),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Row(
+                          children: [
+                            TextButton.icon(onPressed: (){},
+                              icon: const Icon(Icons.upload_file,color: Colors.green,), label: const Text("Upload"),
+                            )
+
+                          ],
+                        ),
+                      )
+
+                    ],
+
+                  ),
+                  const Divider(thickness: 5,color: Colors.black12,),
+                  // Add a text widget with a title for the sheet.
+                  const Text("Record Details ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+                  Container(height: 10), // Add some more space.
+                  const Divider(thickness: 1,color: Colors.black38,),
+
+                  // Add a text widget with a long description for the sheet.
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Sent Country:',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                          Text('$sendcountry',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Divider(thickness: 1,color: Colors.black38,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Recipient Country:',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                          Text('$recipeintcountry',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Divider(thickness: 1,color: Colors.black38,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Sent Amount',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                          Text('$sendamount',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Divider(thickness: 1,color: Colors.black38,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Recipient Amount',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                          Text('$getamount',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Divider(thickness: 1,color: Colors.black38,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Recipient Name',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                          Text(recipientname,
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Divider(thickness: 1,color: Colors.black38,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Recipient Contact',
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                          Text(recipientcontact,
+                            style: TextStyle(
+                                color: Colors.grey[600], // Set the text color.
+                                fontSize: 14 // Set the text size.
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  Container(height: 10), // Add some more space.
+                  // Add a row widget to display buttons for closing and reading more.
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end, // Align the buttons to the right.
+                    children: <Widget>[
+                      // Add a text button to close the sheet.
+                      TextButton(
+                        style: TextButton.styleFrom(foregroundColor: Colors.transparent,), // Make the button text transparent.
+                        onPressed: (){
+                          Navigator.pop(context); // Close the sheet.
+                        },
+                        child: Text("Close", style: TextStyle(color: Theme.of(context).colorScheme.primary)), // Add the button text.
+                      ),
+                      // Add an elevated button to read more.
+
+                    ],
+                  )
+                ],
+              ),
+            );
+          }
+        ),
+      );
+    });
   }
 
 }

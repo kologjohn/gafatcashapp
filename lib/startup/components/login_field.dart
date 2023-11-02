@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:gafatcash/global.dart';
-class LoginField extends StatelessWidget {
+class LoginField extends StatefulWidget {
   final String hintText;
   final  TextEditingController controller;
   final ValidationBuilder validationBuilder;
   final TextInputType textInputType;
   const LoginField({super.key, required this.hintText,required this.controller,required this.validationBuilder,required this.textInputType});
+
+  @override
+  State<LoginField> createState() => _LoginFieldState();
+
+}
+
+class _LoginFieldState extends State<LoginField> {
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +23,9 @@ class LoginField extends StatelessWidget {
         maxWidth: 400,
       ),
       child: TextFormField(
-        keyboardType: textInputType,
-        validator: validationBuilder.build(),
-        controller: controller,
+        keyboardType: widget.textInputType,
+        validator: widget.validationBuilder.build(),
+        controller: widget.controller,
         decoration: InputDecoration(
           //contentPadding: EdgeInsets.all(27),
           enabledBorder: OutlineInputBorder(
@@ -35,7 +42,7 @@ class LoginField extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(10)
           ),
-          hintText: hintText,
+          hintText: widget.hintText,
         ),
       ),
     );

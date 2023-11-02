@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 
-Widget Pie(BuildContext context,double sales,double purchase) {
+Widget Pie(BuildContext context,double pending,double completed) {
   List<PieChartSectionData> paiChartSelectionData = [
     PieChartSectionData(
-      color: Colors.green[900],
-      value: sales,
+      color: Colors.orange,
+      value: pending,
       showTitle: false,
       radius: 25,
     ),
     PieChartSectionData(
-      color: Colors.orange,
-      value: purchase,
+      color: Colors.green[900],
+      value: completed,
       showTitle: false,
       radius: 22,
     ),
@@ -38,14 +38,15 @@ Widget Pie(BuildContext context,double sales,double purchase) {
             children: [
               const SizedBox(height: defaultPadding),
               Text(
-                "$sales",
+                "$completed",
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   color: Colors.white,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  height: 0.5,
+                  height: 0.2,
                 ),
               ),
-              Text("of ${purchase}g",style: const TextStyle(color: Colors.white),)
+              Text("of ${pending}",style: const TextStyle(color: Colors.white),)
             ],
           ),
         ),

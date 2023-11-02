@@ -16,7 +16,7 @@ class ForgotPasText extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, Routes.dashboard);
+              //Navigator.pushNamed(context, Routes.dashboard);
             },
             child: const Text(
               'Forgot Password?',

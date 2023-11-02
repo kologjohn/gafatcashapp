@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gafatcash/startup/controller/database.dart';
@@ -6,10 +7,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseAccounts extends ChangeNotifier{
-  final auth=FirebaseAuth.instance;
+   var auth=FirebaseAuth.instance;
   bool loginstatus=false;
   String error="";
   bool errorstatus=false;
+  var country=["Send to ?"];
   final GoogleSignIn googleSignIn = GoogleSignIn(
     clientId: "1058517351380-dv787nium22lfaj97f578e1rooa8oduq.apps.googleusercontent.com",
   );
@@ -25,21 +27,22 @@ class FirebaseAccounts extends ChangeNotifier{
            accessToken: googleSignInAuthentication.accessToken,
            idToken: googleSignInAuthentication.idToken
        );
-       name=auth.currentUser!.email;
-       print(auth.currentUser!.displayName);
-       auth.signInWithCredential(credentials);
-       if(auth.currentUser!=null)
-         {
-           Navigator.pushNamed(context, Routes.dashboard);
 
-         }
+        loginstatus=true;
+      await  auth.signInWithCredential(credentials);
+       Navigator.pushNamed(context, Routes.dashboard);
+
+       // Dbinsert().addNewUser(name, email, password, firstname, lastname, username, phone;
+       notifyListeners();
+
+
 
 
      }on FirebaseException catch(e){
        name=e.message;
        print(e.message);
      }
-     return name!;
+     notifyListeners();
 
     // try{
     //   await googleSignIn.signIn();
@@ -90,21 +93,35 @@ class FirebaseAccounts extends ChangeNotifier{
 
   Future<void> logout(BuildContext context)  async {
     try {
-      await auth.signOut().whenComplete(() => print("Logout Successfully"));
-     Navigator.popAndPushNamed(context,Routes.login);
+
+      await auth.signOut();
+      Navigator.pushNamedAndRemoveUntil(context, Routes.login, (Route<dynamic> route) => false);
+
+
     } catch (e) {
       print("Error Signing Out $e");
     }
   }
 
-  // Future innitial(BuildContext context) async {
-  //   final user = await auth.currentUser;
-  //   if (user != null) {
-  //     //print("Already Login ${user.email}");
-  //     //Navigator.pushNamed(context, Routes.dashboard);
-  //   }
-  //   notifyListeners();
-  // }
+  Future innitial(BuildContext context) async {
+      print(auth.currentUser);
+    if (auth.currentUser != null) {
+      //print("Already Login ${user.email}");
+     Navigator.pushNamed(context, Routes.dashboard);
+    }
+
+    notifyListeners();
+  }
+
+  Future checklogin(BuildContext context) async {
+    if (auth.currentUser == null) {
+      //print("Already Login ${user.email}");
+      logout(context);
+    }
+
+
+    notifyListeners();
+  }
 
   sessions<List>(String nametxt, int agetxt, String hometowntxt) async {
     // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -126,6 +143,74 @@ class FirebaseAccounts extends ChangeNotifier{
     // sharedPreferences.setString("home", hometowntxt);
     // notifyListeners();
   }
+
+  countries() async {
+    country.clear();
+    country.add("Send to ?");
+    String nn="";
+    double aa=0;
+
+    Dbinsert().db.collection("convert").get().then((value) {
+      for(var i in value.docs)
+      {
+        Dbinsert().db.collection('convert').get().then((QuerySnapshot querySnapshot) {
+          querySnapshot.docs.forEach((doc)
+          {
+             aa+=doc['amount'];
+
+           // country.add(namecount);
+
+            //data.add({doc['Grams']});
+          });
+        });
+      }
+
+    });
+    print(aa);
+
+
+    //country.add("Send to ?");
+      // country.add("Ghana");
+      // country.add("Nigeria");
+      // country.add("Togo");
+       notifyListeners();
+       //print(country);
+      return country;
+  }
+
+  Future<List> getTransactions() async {
+    final List data=[];
+    double totalgram=0;
+    double totalamount=0;
+
+    try {
+      Dbinsert().db.collection("convert").get().then((value) {
+        for(var i in value.docs)
+        {
+          Dbinsert().db.collection('convert').get().then((QuerySnapshot querySnapshot) {
+            querySnapshot.docs.forEach((doc)
+            {
+              totalgram+=doc['amount'];
+              totalamount+=doc['amount'];
+              //print(totalamount);
+              //data.add({doc['Grams']});
+            });
+          });
+        }
+
+      });
+    }
+    catch(e){
+      print(e);
+
+    }
+
+    data.add(totalgram);
+    data.add(totalamount);
+    print(totalgram);
+    return data;
+  }
+
 
 
 }
