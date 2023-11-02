@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Global {
@@ -13,4 +15,21 @@ class Global {
   static const Color bgColor = Color(0xFF212332);
 
   static const defaultPadding = 16.0;
+
+}
+
+class Convert{
+
+  static double truncateToDecimalPlaces(num value, int fractionalDigits)
+  {
+    double converted=0;
+    if(value>0)
+    {
+      converted=(value * pow(10,fractionalDigits)).truncate() / pow(10, fractionalDigits);
+
+    }
+
+    return converted;
+
+  }
 }
