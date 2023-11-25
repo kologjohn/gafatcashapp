@@ -31,11 +31,12 @@ class Signup extends StatelessWidget {
         backgroundColor: Colors.black54,
         child: Consumer<FirebaseAccounts>(
           builder: (context, value, Widget? child) {
+
             return Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
               child: Center(
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxWidth: 400
                   ),
                   child: ListView(

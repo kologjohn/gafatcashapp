@@ -24,6 +24,9 @@ if (flutterVersionName == null) {
 }
 
 android {
+    if (getGradle().getGradleVersion().substring(0, 1).toInteger() >= 8) {
+        namespace "com.gafatcash.gafatcash"
+    }
     namespace "com.gafatcash.gafatcash"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
