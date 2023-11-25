@@ -43,10 +43,10 @@
               "client_type": 3
             },
             {
-              "client_id": "542035889260-vsdi3vm49v39ttatid9kju468ovng63l.apps.googleusercontent.com",
+              "client_id": "542035889260-uuf9hjvo45vbgpmuqg4f5ipq23ts7j67.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.gafatcash.gafatcash"
+                "bundle_id": "com.gafatcash.gafatcash.RunnerTests"
               }
             }
           ]
