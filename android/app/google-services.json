@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "542035889260",
+    "project_id": "gafatcash-405b7",
+    "storage_bucket": "gafatcash-405b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542035889260:android:7f072e027fec60b4eedc49",
+        "android_client_info": {
+          "package_name": "com.gafatcash.gafatcash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542035889260-0f3lgb0mturuqp0d20nr741vsqv4fidc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gafatcash.gafatcash",
+            "certificate_hash": "2e9d9a65a7b82f77f097ff0cf3ca962d88e3f7ee"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSSr_ZtiG9eys6tCpVqJdTPjClejzrZ-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542035889260-qv33ei85cn7j0dbmvamu7oanc66n82iu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
