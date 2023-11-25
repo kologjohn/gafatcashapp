@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "542035889260",
+    "project_id": "gafatcash-405b7",
+    "storage_bucket": "gafatcash-405b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542035889260:android:7f072e027fec60b4eedc49",
+        "android_client_info": {
+          "package_name": "com.gafatcash.gafatcash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542035889260-lueh4glhbhitlefm1q2htfae3mh4gdrb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gafatcash.gafatcash",
+            "certificate_hash": "f04902ce3249f325d68fc6f656c4e52430408887"
+          }
+        },
+        {
+          "client_id": "542035889260-vqese3lo7tvv940uo3f8esl6m6a9c9lq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gafatcash.gafatcash",
+            "certificate_hash": "70f6ac16d0729a0c1886f2a33fd41453c863c27c"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSSr_ZtiG9eys6tCpVqJdTPjClejzrZ-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542035889260-qv33ei85cn7j0dbmvamu7oanc66n82iu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "542035889260-vsdi3vm49v39ttatid9kju468ovng63l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gafatcash.gafatcash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
