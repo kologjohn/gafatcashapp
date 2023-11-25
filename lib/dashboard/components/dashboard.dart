@@ -45,38 +45,10 @@ class _DashboardState extends State<Dashboard> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(
               ),
-              child: PopScope(
-                onPopInvoked: (val){
-                 setState(() {
-                  /// back=true;
-                 });
-                  SnackBar snackBar=SnackBar(content: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                    const Text("Do you want to exit?"),
-                    Row(
-                      children: [
-                        ElevatedButton(onPressed: (){
-                         setState(() {
-                           //exit(1);
-                           back=true;
-                         });
-                        }, child:  Text("${value.session_name} Yes")),
-                        SizedBox(width: 20,),
-                        ElevatedButton(onPressed: (){
-                          setState(() {
-                            back=false;
-                          });
-                        }, child: Text("No")),
-
-                      ],
-                    )
-                  ],));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              child: WillPopScope(
+                onWillPop:() async{
+                  return false;
                 },
-                canPop: back,
                 child: Scaffold(
                   backgroundColor: Global.backgroundColor,
                   appBar: AppBar(
