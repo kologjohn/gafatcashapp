@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "542035889260-0f3lgb0mturuqp0d20nr741vsqv4fidc.apps.googleusercontent.com",
+          "client_id": "542035889260-lueh4glhbhitlefm1q2htfae3mh4gdrb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gafatcash.gafatcash",
-            "certificate_hash": "2e9d9a65a7b82f77f097ff0cf3ca962d88e3f7ee"
+            "certificate_hash": "f04902ce3249f325d68fc6f656c4e52430408887"
+          }
+        },
+        {
+          "client_id": "542035889260-vqese3lo7tvv940uo3f8esl6m6a9c9lq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gafatcash.gafatcash",
+            "certificate_hash": "70f6ac16d0729a0c1886f2a33fd41453c863c27c"
           }
         }
       ],
@@ -33,6 +41,13 @@
             {
               "client_id": "542035889260-qv33ei85cn7j0dbmvamu7oanc66n82iu.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "542035889260-vsdi3vm49v39ttatid9kju468ovng63l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gafatcash.gafatcash"
+              }
             }
           ]
         }

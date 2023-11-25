@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>542035889260-vsdi3vm49v39ttatid9kju468ovng63l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.542035889260-vsdi3vm49v39ttatid9kju468ovng63l</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>542035889260-0f3lgb0mturuqp0d20nr741vsqv4fidc.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCm9VA3WPQ5wvjZ9i3t6-HyD87ymVzTlTI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>542035889260</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.gafatcash.gafatcash</string>
+	<key>PROJECT_ID</key>
+	<string>gafatcash-405b7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gafatcash-405b7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:542035889260:ios:d93c69a787d69c2deedc49</string>
+</dict>
+</plist>
