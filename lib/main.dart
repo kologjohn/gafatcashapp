@@ -26,7 +26,7 @@ void main() async{
   }
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
-      name: 'YourAPP',
+      name: 'Gafat Cash',
       options: DefaultFirebaseOptions.currentPlatform,
     ).whenComplete(() {
       print("completedAppInitialize");
