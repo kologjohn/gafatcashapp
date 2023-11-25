@@ -4,12 +4,11 @@ import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:gafatcash/startup/controller/accounts.dart';
 import 'package:gafatcash/startup/controller/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'global.dart';
 String tid="";
 String mainpage=Routes.login;
-String key="AIzaSyBSSr_ZtiG9eys6tCpVqJdTPjClejzrZ-g";
-
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final session=await SessionManager().containsKey("pin");
@@ -25,12 +24,14 @@ void main() async{
       }
     //mainpage="pinscreen";
   }
-  if(kIsWeb)
-    {
-      key="AIzaSyD3qFTM2ruRBEEoNC2umyPSucKNMzyeZaQ";
-    }
-  await Firebase.initializeApp(options:  FirebaseOptions(apiKey: key, appId: "1:542035889260:android:7f072e027fec60b4eedc49", messagingSenderId: "", projectId: "gafatcash-405b7",storageBucket: "gafatcash-405b7.appspot.com"));
-
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      name: 'YourAPP',
+      options: DefaultFirebaseOptions.currentPlatform,
+    ).whenComplete(() {
+      print("completedAppInitialize");
+    });
+  }
   runApp( MyApp(initroute: mainpage,));
 }
 
