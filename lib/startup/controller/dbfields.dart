@@ -24,7 +24,15 @@ class Dbfield{
   static String day="day";
   static String month="month";
   static String year="year";
-  static String reciname="recipientname ";
+  static String reciname="recipientname";
   static String momotype="momotype ";
-  static String recipeintbank="recipeintbank ";
+  static String recipeintbank="recipeintbank";
+  static String image="image";
+  static String reference="reference ";
+  static String paymode="paymode ";
+  //cahrt
+  static String message="message";
+  static String recipient="recipient";
+  static String sender="sender";
+  static String messagetype="messagetype";
 }

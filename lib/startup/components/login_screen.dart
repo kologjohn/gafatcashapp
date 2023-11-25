@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:gafatcash/global.dart';
 import 'package:gafatcash/startup/components/forgot_password.dart';
@@ -18,8 +19,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  void logintest() async{
+    print(FirebaseAccounts().session_email);
+    if(FirebaseAccounts().session_email.isNotEmpty)
+    {
+      Navigator.pushNamed(context, Routes.pinscreen);
+      print(FirebaseAccounts().session_name);
+    }
+  }
+
   @override
   void initState() {
+    logintest();
+    if(FirebaseAccounts().session_name.isNotEmpty){
+      print("Pin Login");
+    }
     // TODO: implement initState
     //FirebaseAccounts().innitial(context);
     super.initState();
@@ -33,9 +47,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Consumer<FirebaseAccounts>(
       builder: (BuildContext context,  value, child) {
+        //value.getsession();
+
         return  ProgressHUD(
           barrierColor: Colors.transparent,
           child: Builder(
@@ -91,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             backgroundColor: Colors.red,
                                             showCloseIcon: true,
                                             closeIconColor: Colors.white,
-                                            content: Text("Error!! $mylogin",
+                                            content: Text("Error!! ${value.errorMsgs}",
                                               style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)
                                         );
                                         ScaffoldMessenger.of(context).showSnackBar(snackbar);
@@ -99,7 +114,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                       }
                                       else
                                       {
-                                        Navigator.pushNamed(context, Routes.dashboard);
+                                        if(await SessionManager().containsKey("pin"))
+                                        {
+                                          Navigator.pushNamed(context, Routes.pinscreen);
+                                        }
+                                        else
+                                        {
+                                          Navigator.pushNamed(context, Routes.pinsetup);
+                                        }
+
                                         SnackBar snackbar= const SnackBar(backgroundColor:Colors.green,content: Text("Login Successful",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),));
                                         ScaffoldMessenger.of(context).showSnackBar(snackbar);
                                         progress.dismiss();
@@ -166,7 +189,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     label: '',horizontalPadding: 20, onPressed: () async {
                                       final pro=ProgressHUD.of(context);
                                      pro!.show();
-                                     await value.googlesignup(context);
+                                      await value.googlesignup(context);
+                                     // await value.getsession();
+                                    //  await value.signInWithGoogle();
+                                     SnackBar snac=SnackBar(content: Text(value.errorMsgs));
+                                     ScaffoldMessenger.of(context).showSnackBar(snac);
                                       pro!.dismiss();
 
 
@@ -199,4 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
      // child:,
     );
   }
+}
+void file(){
+
 }
