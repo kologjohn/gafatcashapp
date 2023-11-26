@@ -5,10 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:gafatcash/global.dart';
 import 'package:gafatcash/startup/controller/accounts.dart';
 import 'package:provider/provider.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../startup/components/login_field.dart';
 import '../../startup/controller/database.dart';
@@ -26,8 +28,20 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
+  bool pending=false;
+ checker()async{
+   bool pencheck=await SessionManager().get("pending");
+   print(pencheck);
+   if(pencheck){
+     setState(() {
+       pending=true;
+
+     });
+   }
+ }
 @override
   void initState() {
+   checker();
     // TODO: implement initState
     super.initState();
     FirebaseAccounts().ngbanks();
@@ -46,6 +60,7 @@ class _FormPageState extends State<FormPage> {
     bool isChecked=false;
     bool isError=false;
     bool paymodeshoe=true;
+
 
 
 
@@ -125,104 +140,143 @@ bool ghannastatus=true;
 
 
             }
+          Widget sendmoney = Center(
+            child: Stepper(
+              type: StepperType.horizontal,
+              currentStep: currentStep,
+              onStepTapped: (step) =>
+                  setState(() {
+                    currentStep = step;
+                  }),
+              controlsBuilder: (context, _) {
+                return Visibility(
+                  visible: progressbtn,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            bool isLastStep = (currentStep ==
+                                getSteps().length - 1);
+                            if (isLastStep) {
+                              //Do something with this information
+                            } else {
+                              setState(() {
+                                currentStep += 1;
+                              });
+                            }
+                          },
+                          child: Visibility(
+                            visible: continuestatus,
+                            child: ElevatedButton(onPressed: () {
+                              if (currentStep == step1) {
+                                if (validate1() && isChecked) {
+                                  setState(() {
+                                    currentStep = step2;
+                                  });
+                                }
+                                else if (!isChecked) {
+                                  isError = true;
+                                  SnackBar snack = const SnackBar(
+                                      content: Text(
+                                        "Please check on the checkbox to agree before your continue to step two",
+                                        style: TextStyle(
+                                            color: Colors.red),));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      snack);
+                                }
+                              }
+                              else if (currentStep == step2) {
+                                if (validate2()) {
+                                  setState(() {
+                                    currentStep = step3;
+                                  });
+                                }
+                                // bool stage2=validate2();
+                                // if(bene_cphone.text!=bene_phone.text)
+                                //   {
+                                //     bene_phone.selection.start.sign;
+                                //     stage2=false;
+                                //   }
+                                //  // print(stage2);
+
+                              }
+                              if (currentStep == step3) {
+                                // progressbtn=false;
+                              }
+                            },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blue),
+                              child: const Text("Continue"),),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            //print(currentStep);
+
+                            currentStep == 0
+                                ? null
+                                : setState(() {
+                              currentStep -= 1;
+                            });
+                          },
+                          child: ElevatedButton(onPressed: null,
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.cyan),
+                              child: const Text("Previous")),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+
+              steps: getSteps(),
+            ),
+          );
+
+          if(pending){
+            final Stream<QuerySnapshot> pendingstream = Dbinsert().db.collection('sendmoney').where('email',isEqualTo: '${value.auth.currentUser!.email}').where('status',isEqualTo: "pending").snapshots();
+            sendmoney=StreamBuilder<QuerySnapshot>(
+              stream: pendingstream,
+              builder: (context, AsyncSnapshot<QuerySnapshot>snapshot) {
+                Widget? test;
+                Widget? content;
+                Widget? myicon;
+                if(snapshot.hasData){
+                  if(snapshot.data!.size==0)
+                    {
+                      test= Text("Transaction Approved",style: TextStyle(fontSize: 18,color: Colors.blue[500]),);
+                      content=const Text("Your transaction has been completed.Thank you for doing business with us");
+                     myicon=  Icon(Icons.done_all,size: 50,color: Colors.green[800],);
+
+                    }
+                  else
+                    {
+                      myicon= const Icon(Icons.lock_clock,size: 50,color: Colors.orange,);
+
+                      test=const Text("Transaction Pending",style: TextStyle(color: Colors.amber),);
+                      content=const Text("Please your transaction is being processed. your will be notified when the transaction is completed");
+
+
+                    }
+                }
+
+                return  AlertDialog(
+                    icon: myicon,
+                title:  test,
+                content:content
+                );
+
+              }
+            );
+          }
+
           return Container(
               color: Global.backgroundColor,
               padding: const EdgeInsets.all(5),
-              child: Center(
-                child: Stepper(
-                  type: StepperType.horizontal,
-                  currentStep: currentStep,
-                  onStepTapped: (step) => setState(() {
-                    currentStep = step;
-                  }),
-                  controlsBuilder: (context,_) {
-                    return Visibility(
-                      visible: progressbtn,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: (){
-                                  bool isLastStep = (currentStep == getSteps().length - 1);
-                                  if (isLastStep) {
-                                    //Do something with this information
-                                  } else {
-                                    setState(() {
-                                      currentStep += 1;
-                                    });
-                                  }
-
-
-
-                              },
-                              child: Visibility(
-                                visible: continuestatus,
-                                child: ElevatedButton(onPressed: (){
-
-                                  if(currentStep==step1)
-                                    {
-
-                                      if(validate1() && isChecked){
-                                        setState(() {
-                                          currentStep=step2;
-                                        });
-                                      }
-                                      else if(!isChecked)
-                                          {
-                                            isError=true;
-                                            SnackBar snack=const SnackBar(content: Text("Please check on the checkbox to agree before your continue to step two",style: TextStyle(color:Colors.red),));
-                                            ScaffoldMessenger.of(context).showSnackBar(snack);
-                                          }
-
-
-                                    }
-                                  else if(currentStep==step2)
-                                    {
-                                      if(validate2()){
-                                        setState(() {
-                                          currentStep=step3;
-                                        });
-                                      }
-                                      // bool stage2=validate2();
-                                      // if(bene_cphone.text!=bene_phone.text)
-                                      //   {
-                                      //     bene_phone.selection.start.sign;
-                                      //     stage2=false;
-                                      //   }
-                                      //  // print(stage2);
-
-                                    }
-                                  if(currentStep==step3)
-                                    {
-                                     // progressbtn=false;
-                                    }
-
-
-                                },style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),child: const Text("Continue"),),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: (){
-                                //print(currentStep);
-
-                                currentStep == 0
-                                    ? null
-                                    : setState(() {
-                                  currentStep -= 1;
-                                });
-                              },
-                              child: ElevatedButton(onPressed: null,style: ElevatedButton.styleFrom(backgroundColor: Colors.cyan), child: const Text("Previous")),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-
-                  steps: getSteps(),
-                ),
-              ));
+              child: sendmoney);
         },
         // child: ,
       ),
@@ -377,7 +431,7 @@ bool ghannastatus=true;
                       sendingamount = fsm;
                       recievedamount =Convert.truncateToDecimalPlaces((sendingamount * scale), 1);
                       getAmount.text = "$recievedamount";
-                      agreement = "You are confirming that we will be sending  ${sender_currency} ${payAmount.text}  and the recipient will receive  ${recipient_currency} ${getAmount.text} ";
+                      agreement = "You are confirming that you will be sending  ${sender_currency} ${payAmount.text} to us and the recipient will receive  ${recipient_currency} ${getAmount.text} ";
                       showagreement=true;
                     }
                     else
@@ -835,7 +889,7 @@ bool ghannastatus=true;
                               launchUrl(_url);
 
                             }catch (e){
-                              print("Erro $e");
+                             // print("Erro $e");
 
                             }
 
@@ -860,15 +914,14 @@ bool ghannastatus=true;
                 ElevatedButton(onPressed: () async{
                   final progress=ProgressHUD.of(context);
                   progress?.show();
-                  value.getConnectionType();
-                  // Future.delayed(const Duration(seconds: 10),()=>{
-                  //   progress!.dismiss()
-                  // });
                   await value.newupload();
                   progress!.dismiss();
                   image=value.imageUrl;
                   if(image.isNotEmpty){
-                    imagestatus=true;
+                    setState(() {
+                      imagestatus=true;
+
+                    });
                   }
 
                  // fileupload();
@@ -939,6 +992,7 @@ bool ghannastatus=true;
                         String insert=await Dbinsert().sendmoney(paymentmode,reference,image,memail!, mphone, tocountry, fromcountry, sendamt, getamt, beneficairyNum, beneficairyName, reason.text, beneficairyNum, recipient_currency, sender_currency, momotype.text,bank);
                         if(insert=="Saved")
                         {
+                          await SessionManager().set("pending", true);
                           progess.dismiss();
                           setState(() {
                             currentStep=0;
@@ -953,9 +1007,18 @@ bool ghannastatus=true;
                             bene_name.clear();
                             momotype.clear();
                             reason.clear();
-                            imagestatus=false;
                             image="";
                             reference="";
+                            showagreement=false;
+                            setState(() {
+                              pending=true;
+                              imagestatus=false;
+                              value.file=null;
+
+                            });
+
+                            SnackBar snackbar= const SnackBar(backgroundColor:Colors.green,content: Text("Transaction Saved Successful. Tap on records see the status of your transaction",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),));
+                            ScaffoldMessenger.of(context).showSnackBar(snackbar);
                           });
                         }
                       } else if (!validate1()) {

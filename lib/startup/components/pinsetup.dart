@@ -121,7 +121,6 @@ class _PinscreenState extends State<Pinsetup> {
                                         {
                                           if(await SessionManager().containsKey("pin"))
                                             {
-                                              print(await SessionManager().get("login"));
                                               SnackBar snackbar= const SnackBar(backgroundColor:Colors.deepOrangeAccent,content: Text("Pin Setup already",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),));
                                               ScaffoldMessenger.of(context).showSnackBar(snackbar);
                                               Navigator.pushNamed(context, Routes.pinscreen);

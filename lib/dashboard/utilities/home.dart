@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:gafatcash/global.dart';
 import 'package:provider/provider.dart';
 import '../../startup/controller/accounts.dart';
@@ -15,6 +16,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  checkforpeding(String status) async{
+    if(status=="pending")
+      {
+        await SessionManager().set("pending", true);
+        await SessionManager().set("pendingcount", 60);
+      }
+    else
+      {
+        await SessionManager().set("pending", false);
+
+      }
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -98,12 +111,29 @@ class _HomeState extends State<Home> {
                         recieved+=snapshot.data!.docs[i]['sendamount'];
 
                       }
+                    if(ngpending!=0 && ghpending!=0)
+                      {
+                        SessionManager().set("pending", true);
+                      }
+                    else{
+                      SessionManager().set("pending", false);
+
+                    }
+
+                  }
+                if(ngpending!=0 || ghpending!=0)
+                  {
+                    checkforpeding("pending");
+                  }
+                else
+                  {
+                    checkforpeding("nopending");
                   }
                 //tgrams=snapshot.data!.docs[0]['Grams'];
               }
               else
                 {
-                  return const Text("No Data");
+                  return const Text("Loading Data...");
                 }
               double ghtotal=ghrecieved+ghpending;
               double ngtotal=ngrecieved+ngpending;
