@@ -18,7 +18,7 @@ void main() async{
   }
   else{
     await Firebase.initializeApp(
-      name: 'Gafat Cash',
+      name: '',
       options: DefaultFirebaseOptions.web,
     ).whenComplete(() {
     });
