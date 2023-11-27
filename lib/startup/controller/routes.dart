@@ -1,4 +1,5 @@
 import 'package:gafatcash/dashboard/components/chart.dart';
+import 'package:gafatcash/main.dart';
 import 'package:gafatcash/startup/components/pin_screen.dart';
 import 'package:gafatcash/startup/components/pinsetup.dart';
 
@@ -23,4 +24,5 @@ final pages={
   Routes.charts:(context)=>const ChatPage(),
   Routes.pinscreen:(context)=>const Pinscreen(),
   Routes.pinsetup:(context)=>const Pinsetup(),
+
 };

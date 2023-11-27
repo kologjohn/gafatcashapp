@@ -1,9 +1,6 @@
-import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:gafatcash/dashboard/components/chat_page.dart';
 import 'package:gafatcash/dashboard/components/sendmoney.dart';
-import 'package:gafatcash/startup/controller/routes.dart';
+import 'package:gafatcash/startup/controller/localauth.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import '../../startup/controller/accounts.dart';
@@ -11,6 +8,7 @@ import '../components/page3.dart';
 import '../utilities/menu.dart';
 import '../utilities/home.dart';
 import 'package:gafatcash/global.dart';
+import 'package:local_auth/local_auth.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -24,10 +22,16 @@ class _DashboardState extends State<Dashboard> {
   int currentPageIndex = 0;
   late List datalist;
   String? email =FirebaseAccounts().session_name;
+  void checker() async{
+    await verify();
+  }
   @override
-  void initState() {
+
+  void initState()  {
+checker();
     FirebaseAccounts().checklogin(context);
     FirebaseAccounts().getsession();
+
    // email= FirebaseAccounts().auth.currentUser!.email;
     // TODO: implement initState
     super.initState();
@@ -37,7 +41,8 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Consumer<FirebaseAccounts>(
       builder: (BuildContext context, value, Widget? child) {
-
+        value.transstatus();
+     print("Sendmoney:${value.pending}");
         //value.getsession();
        return ProgressHUD(
           barrierColor: Colors.black26,
@@ -137,7 +142,7 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         Container(
                             alignment: Alignment.center,
-                            child:Text("How the App Works",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)//ChatPage()
+                            child:const Text("How the App Works",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)//ChatPage()
                         ),
                       ][currentPageIndex];
                     },

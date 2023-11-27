@@ -11,6 +11,21 @@ String tid="";
 String mainpage=Routes.login;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  if(kIsWeb)
+  {
+    await Firebase.initializeApp(options:  const FirebaseOptions(apiKey: "AIzaSyD3qFTM2ruRBEEoNC2umyPSucKNMzyeZaQ", appId: "1:542035889260:android:7f072e027fec60b4eedc49", messagingSenderId: "", projectId: "gafatcash-405b7",storageBucket: "gafatcash-405b7.appspot.com"));
+
+  }
+  else{
+    await Firebase.initializeApp(
+      name: 'Gafat Cash',
+      options: DefaultFirebaseOptions.web,
+    ).whenComplete(() {
+    });
+
+  }
+
+
   final session=await SessionManager().containsKey("pin");
   if(session){
     bool loginstatus=await SessionManager().get("login");
@@ -24,14 +39,7 @@ void main() async{
       }
     //mainpage="pinscreen";
   }
-  if (Firebase.apps.isEmpty) {
-    await Firebase.initializeApp(
-      name: 'Gafat Cash',
-      options: DefaultFirebaseOptions.currentPlatform,
-    ).whenComplete(() {
-      print("completedAppInitialize");
-    });
-  }
+
   runApp( MyApp(initroute: mainpage,));
 }
 

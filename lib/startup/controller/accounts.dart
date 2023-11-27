@@ -21,8 +21,11 @@ class FirebaseAccounts extends ChangeNotifier{
   String session_name="";
   String session_phone="";
   bool googlebtn=false;
+  String pending="";
+  int scoun=0;
 
-   var auth=FirebaseAuth.instance;
+
+  var auth=FirebaseAuth.instance;
    final storageRef = FirebaseStorage.instance.ref();
    ImagePicker imagePicker = ImagePicker();
    File? file;
@@ -408,7 +411,6 @@ class FirebaseAccounts extends ChangeNotifier{
    Widget newdisplayfile(){
      if(file!=null) {
        // print(img64);
-
        return Image.file(file!,fit: BoxFit.contain,);
      }
      else
@@ -539,5 +541,37 @@ class FirebaseAccounts extends ChangeNotifier{
     // print(cnt);
      notifyListeners();
    }
+
+    transstatus() async {
+      try {
+        await for(var snapshot in Dbinsert().db.collection("sendmoney").where('email',isEqualTo:'${auth.currentUser!.email}').snapshots())
+          {
+
+            for(var messages in snapshot.docs){
+              if(messages.data()['status']=="pending")
+                {
+                  print("pending");
+                  pending="pending";
+                  scoun++;
+                }
+              else
+                {
+                  print("NULL");
+                }
+
+            }
+          }
+
+      }
+      catch(e){
+        print(e);
+
+      }
+      notifyListeners();
+      return scoun;
+      print("TEST:${scoun}");
+
+
+    }
 }
 

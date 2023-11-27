@@ -64,6 +64,8 @@ dependencies:
   firebase_storage: ^11.5.1
   url_launcher: ^6.2.1
   flutter_session_manager: ^1.0.3
+  local_auth: ^2.1.7
+  timer_count_down: ^2.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

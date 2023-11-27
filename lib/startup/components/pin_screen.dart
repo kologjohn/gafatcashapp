@@ -108,12 +108,23 @@ class _PinscreenState extends State<Pinscreen> {
                                       onTap: (){
                                        // Navigator.pushNamed(context, Routes.dashboard);
                                       },
-                                      child: const Text(
-                                        'Forgot PIN?',
-                                        style: TextStyle(
-                                          color: Global.gradient3,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
+                                      child: GestureDetector(
+                                        onTap: () async{
+                                          await FirebaseAccounts().auth.signOut();
+                                          await SessionManager().destroy();
+                                          Navigator.pushNamed(context,Routes.login);
+
+                                          SnackBar snackbar= const SnackBar(backgroundColor:Colors.green,content: Text("Sign in to again to setup a new pin",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),));
+                                          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+
+                                        },
+                                        child: const Text(
+                                          'Forgot PIN?',
+                                          style: TextStyle(
+                                            color: Global.gradient3,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                          ),
                                         ),
                                       ),
                                     ),
